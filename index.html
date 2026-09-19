@@ -539,15 +539,21 @@ body.dark-mode .app-footer {
 
 <header>
   <div class="brand">
+
     <div>
       <h1>✦ 創作編集部</h1>
       <p>小説ストーリー・トレーニング</p>
     </div>
-       <button class="theme-toggle" onclick="toggleTheme()" aria-label="テーマ切り替え">
-  🌙
-</button>
-    
-    
+
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="テーマ切り替え">
+      🌙
+    </button>
+
+    <div class="points">
+      ✦ <span id="points">0</span> pt
+    </div>
+
+  </div>
 
   <nav>
     <button class="navbtn active" data-screen="home">ホーム</button>
@@ -557,7 +563,7 @@ body.dark-mode .app-footer {
     <button class="navbtn" data-screen="stock">MVPストック</button>
   </nav>
 </header>
-
+  
 <main>
 
 <!-- HOME -->
@@ -1425,8 +1431,8 @@ function loadTheme() {
   updateThemeButton();
 }
 
+  loadUserName();
   loadTheme();
-  
 
 </script>
 
