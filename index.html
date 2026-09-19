@@ -6,6 +6,7 @@
 <meta name="theme-color" content="#ff4f7b">
 <title>創作編集部｜小説トレーニング</title>
 
+
 <style>
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -477,6 +478,78 @@ footer{
   color: #888;
   font-size: 12px;
 }
+
+  /* =========================
+   DARK MODE
+========================= */
+
+body.dark-mode {
+  background: #17171c;
+  color: #f4f4f6;
+}
+
+body.dark-mode .card,
+body.dark-mode .panel,
+body.dark-mode .task-card {
+  background: #24242b;
+  color: #f4f4f6;
+}
+
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+  background: #2b2b33;
+  color: #ffffff;
+  border-color: #44444d;
+}
+
+body.dark-mode .muted,
+body.dark-mode .sub,
+body.dark-mode small {
+  color: #b5b5bf;
+}
+
+body.dark-mode .app-footer {
+  color: #888894;
+}
+
+.theme-toggle {
+  border: none;
+  background: transparent;
+  font-size: 22px;
+  cursor: pointer;
+  padding: 6px;
+}
+
+  function toggleTheme() {
+  document.body.classList.toggle("dark-mode");
+
+  const isDark = document.body.classList.contains("dark-mode");
+
+  localStorage.setItem("creativeTheme", isDark ? "dark" : "light");
+
+  updateThemeButton();
+}
+
+function updateThemeButton() {
+  const button = document.querySelector(".theme-toggle");
+
+  if (!button) return;
+
+  const isDark = document.body.classList.contains("dark-mode");
+
+  button.textContent = isDark ? "☀️" : "🌙";
+}
+
+function loadTheme() {
+  const theme = localStorage.getItem("creativeTheme");
+
+  if (theme === "dark") {
+    document.body.classList.add("dark-mode");
+  }
+
+  updateThemeButton();
+}
 </style>
 
 </head>
@@ -496,6 +569,11 @@ footer{
   <div class="brand">
     <div>
       <h1>✦ 創作編集部</h1>
+       <button class="theme-toggle" onclick="toggleTheme()" aria-label="テーマ切り替え">
+
+      🌙
+
+    </button>
       <p>小説ストーリー・トレーニング</p>
     </div>
     <div class="points">✦ <span id="points">0</span> pt</div>
