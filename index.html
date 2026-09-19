@@ -931,37 +931,43 @@ const state={
    INIT
 ========================= */
 
-document.addEventListener("DOMContentLoaded",()=>{
-  updatePoints();
-  createEndingInputs();
-  createTitleInputs();
-  renderCalendar("homeCalendar");
-  renderStock();
-  setEditorMessage();
-  newMotif();
+updatePoints();
+createEndingInputs();
+createTitleInputs();
+renderCalendar("homeCalendar");
+renderStock();
+setEditorMessage();
+newMotif();
 
-  document.querySelectorAll(".navbtn").forEach(btn=>{
-    btn.addEventListener("click",()=>{
-      showScreen(btn.dataset.screen);
-    });
-  });
-
-  document.querySelectorAll(".time-choice").forEach(btn=>{
-    btn.addEventListener("click",()=>{
-      document.querySelectorAll(".time-choice").forEach(x=>x.classList.remove("selected"));
-      btn.classList.add("selected");
-    });
-  });
-
-  document.querySelectorAll(".pack").forEach(btn=>{
-    btn.addEventListener("click",()=>{
-      document.querySelectorAll(".pack").forEach(x=>x.classList.remove("selected"));
-      btn.classList.add("selected");
-      showPack(btn.dataset.pack);
-    });
+/* ナビゲーション */
+document.querySelectorAll(".navbtn").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    showScreen(btn.dataset.screen);
   });
 });
 
+/* 時間選択 */
+document.querySelectorAll(".time-choice").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    document.querySelectorAll(".time-choice").forEach(x=>{
+      x.classList.remove("selected");
+    });
+
+    btn.classList.add("selected");
+  });
+});
+
+/* 課題パック */
+document.querySelectorAll(".pack").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    document.querySelectorAll(".pack").forEach(x=>{
+      x.classList.remove("selected");
+    });
+
+    btn.classList.add("selected");
+    showPack(btn.dataset.pack);
+  });
+});
 /* =========================
    NAVIGATION
 ========================= */
@@ -1394,9 +1400,8 @@ function escapeHTML(str){
     .replaceAll('"',"&quot;")
     .replaceAll("'","&#039;");
 }
-
-  loadUserName();
-
+loadUserName();
+  
   /* =========================
    DARK MODE
 ========================= */
@@ -1431,7 +1436,7 @@ function loadTheme() {
   updateThemeButton();
 }
 
-  loadUserName();
+
   loadTheme();
 
 </script>
