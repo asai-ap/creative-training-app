@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#ff4f7b">
+<title>創作編集部｜小説トレーニング</title>
+
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:#f7f7fa;
+  color:#292936;
+  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;
+  line-height:1.65;
+}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.app{
+  max-width:760px;
+  margin:auto;
+  min-height:100vh;
+  padding-bottom:90px;
+}
+header{
+  background:#fff;
+  padding:24px 18px 18px;
+  border-bottom:1px solid #eee;
+  position:sticky;
+  top:0;
+  z-index:20;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.brand h1{
+  margin:0;
+  font-size:22px;
+  letter-spacing:.02em;
+}
+.brand p{
+  margin:3px 0 0;
+  font-size:12px;
+  color:#888;
+}
+.points{
+  background:#fff0f4;
+  color:#ff3f70;
+  border-radius:999px;
+  padding:7px 12px;
+  font-size:12px;
+  font-weight:700;
+}
+nav{
+  display:flex;
+  gap:7px;
+  overflow-x:auto;
+  padding-top:15px;
+  scrollbar-width:none;
+}
+nav::-webkit-scrollbar{display:none}
+.navbtn{
+  flex:none;
+  border:0;
+  background:#f1f1f5;
+  color:#666;
+  padding:9px 13px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:700;
+}
+.navbtn.active{
+  background:#ff4f7b;
+  color:#fff;
+}
+
+main{padding:20px 16px}
+.screen{display:none}
+.screen.active{display:block}
+
+.hero{
+  background:linear-gradient(135deg,#fff,#fff3f6);
+  border-radius:24px;
+  padding:24px 20px;
+  margin-bottom:16px;
+  border:1px solid #f3dce3;
+}
+.hero .label{
+  display:inline-block;
+  color:#ff3f70;
+  font-size:11px;
+  font-weight:800;
+  margin-bottom:5px;
+}
+.hero h2{
+  margin:0 0 8px;
+  font-size:26px;
+  line-height:1.35;
+}
+.hero p{
+  margin:0;
+  color:#777;
+  font-size:13px;
+}
+
+.card{
+  background:#fff;
+  border-radius:20px;
+  padding:18px;
+  margin-bottom:14px;
+  border:1px solid #eee;
+  box-shadow:0 3px 12px rgba(0,0,0,.035);
+}
+.card h3{
+  margin:0 0 10px;
+  font-size:17px;
+}
+.card p{
+  margin:5px 0;
+}
+.small{
+  font-size:12px;
+  color:#888;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.grid3{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+}
+@media(max-width:420px){
+  .grid3{grid-template-columns:1fr}
+}
+
+.bigbtn{
+  width:100%;
+  border:0;
+  border-radius:17px;
+  padding:15px;
+  background:#ff4f7b;
+  color:white;
+  font-weight:800;
+  margin-top:10px;
+}
+.bigbtn.secondary{
+  background:#292936;
+}
+.bigbtn.light{
+  background:#fff0f4;
+  color:#ff3f70;
+}
+.bigbtn.green{
+  background:#48a878;
+}
+.bigbtn:active,.choice:active,.navbtn:active{
+  transform:scale(.98);
+}
+
+.choice{
+  border:1px solid #e8e8ed;
+  background:#fff;
+  border-radius:15px;
+  padding:14px 10px;
+  text-align:center;
+  color:#555;
+  font-weight:700;
+}
+.choice.selected{
+  border-color:#ff4f7b;
+  background:#fff0f4;
+  color:#ff3f70;
+}
+
+textarea,input,select{
+  width:100%;
+  border:1px solid #dddde5;
+  border-radius:13px;
+  padding:12px;
+  background:#fff;
+  color:#292936;
+  outline:none;
+}
+textarea{
+  min-height:115px;
+  resize:vertical;
+}
+textarea:focus,input:focus,select:focus{
+  border-color:#ff7c9b;
+}
+.field{
+  margin:12px 0;
+}
+.field label{
+  display:block;
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:6px;
+  color:#555;
+}
+
+.section-title{
+  margin:25px 3px 10px;
+  font-size:13px;
+  font-weight:900;
+  color:#777;
+  letter-spacing:.08em;
+}
+
+.badge{
+  display:inline-block;
+  background:#f1f1f5;
+  border-radius:999px;
+  padding:4px 9px;
+  font-size:10px;
+  color:#777;
+  font-weight:700;
+  margin-right:4px;
+}
+.badge.pink{
+  background:#fff0f4;
+  color:#ff3f70;
+}
+
+.editor{
+  background:#292936;
+  color:#fff;
+  border-radius:18px;
+  padding:17px;
+}
+.editor .name{
+  color:#ff91ae;
+  font-size:12px;
+  font-weight:800;
+}
+.editor p{
+  margin:6px 0 0;
+  font-size:13px;
+}
+
+.gacha{
+  text-align:center;
+  padding:12px 0;
+}
+.gacha-icon{
+  font-size:45px;
+  margin-bottom:5px;
+}
+.task{
+  font-size:20px;
+  font-weight:900;
+  line-height:1.5;
+  margin:12px 0;
+}
+.task-sub{
+  color:#777;
+  font-size:12px;
+}
+
+.result{
+  display:none;
+  background:#fff7df;
+  border:1px solid #f2df9e;
+  border-radius:15px;
+  padding:13px;
+  margin-top:12px;
+  font-size:13px;
+}
+.result.show{display:block}
+
+.timer{
+  font-size:56px;
+  font-weight:900;
+  text-align:center;
+  letter-spacing:.04em;
+  margin:10px 0;
+  color:#292936;
+}
+.timer.running{color:#ff4f7b}
+
+.motif{
+  background:#fff0f4;
+  color:#ff3f70;
+  border-radius:18px;
+  padding:20px;
+  text-align:center;
+  font-size:24px;
+  font-weight:900;
+  margin:12px 0;
+}
+
+.ten-row{
+  display:flex;
+  gap:8px;
+  align-items:flex-start;
+  margin-bottom:9px;
+}
+.ten-no{
+  flex:none;
+  width:27px;
+  height:27px;
+  border-radius:50%;
+  background:#f1f1f5;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:11px;
+  font-weight:800;
+  margin-top:8px;
+}
+.ten-row input{flex:1}
+
+.mvp{
+  flex:none;
+  border:1px solid #ddd;
+  background:#fff;
+  border-radius:10px;
+  width:42px;
+  height:42px;
+  font-size:18px;
+}
+.mvp.on{
+  background:#fff0b8;
+  border-color:#e9c84c;
+}
+
+.calendar{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:5px;
+}
+.day{
+  aspect-ratio:1;
+  border-radius:9px;
+  background:#f1f1f5;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:11px;
+  color:#999;
+}
+.day.done{
+  background:#ff4f7b;
+  color:#fff;
+  font-weight:800;
+}
+.day.today{
+  outline:2px solid #ff4f7b;
+  outline-offset:1px;
+}
+
+.mypost{
+  background:#fff;
+  border:1px solid #eee;
+  border-radius:15px;
+  padding:14px;
+  margin-bottom:9px;
+}
+.mypost .date{
+  font-size:10px;
+  color:#aaa;
+}
+.mypost .star{
+  color:#e3b900;
+  font-size:18px;
+}
+
+.tip{
+  border-left:4px solid #ff4f7b;
+  padding:10px 13px;
+  background:#fff;
+  border-radius:0 12px 12px 0;
+  font-size:13px;
+}
+.tip strong{
+  display:block;
+  color:#ff3f70;
+  margin-bottom:3px;
+}
+
+.empty{
+  text-align:center;
+  padding:25px 10px;
+  color:#aaa;
+  font-size:13px;
+}
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:25px;
+  transform:translateX(-50%) translateY(20px);
+  background:#292936;
+  color:#fff;
+  border-radius:999px;
+  padding:11px 18px;
+  font-size:12px;
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
+  z-index:100;
+  white-space:nowrap;
+}
+.toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+footer{
+  text-align:center;
+  color:#aaa;
+  font-size:10px;
+  padding:20px;
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<header>
+  <div class="brand">
+    <div>
+      <h1>✦ 創作編集部</h1>
+      <p>小説ストーリー・トレーニング</p>
+    </div>
+    <div class="points">✦ <span id="points">0</span> pt</div>
+  </div>
+
+  <nav>
+    <button class="navbtn active" data-screen="home">ホーム</button>
+    <button class="navbtn" data-screen="practice">練習</button>
+    <button class="navbtn" data-screen="oneline">ワンライ</button>
+    <button class="navbtn" data-screen="titles">タイトル10個</button>
+    <button class="navbtn" data-screen="stock">MVPストック</button>
+  </nav>
+</header>
+
+<main>
+
+<!-- HOME -->
+<section id="home" class="screen active">
+
+  <div class="hero">
+    <span class="label">TODAY'S CREATIVE TRAINING</span>
+    <h2>今日も、1ミリだけ<br>物語を前へ。</h2>
+    <p>うまく書くより、まず「思いつく」を増やそう。</p>
+  </div>
+
+  <div class="card">
+    <h3>🎲 今日の課題を引く</h3>
+    <p class="small">編集部が今日のトレーニングを選びます。</p>
+    <div class="grid3" style="margin-top:12px">
+      <button class="choice time-choice" data-time="3">3分<br><small>ちょこっと</small></button>
+      <button class="choice time-choice" data-time="10">10分<br><small>しっかり</small></button>
+      <button class="choice time-choice" data-time="20">20分<br><small>がっつり</small></button>
+    </div>
+    <button class="bigbtn" onclick="gacha()">🎲 課題ガチャ</button>
+    <div id="gachaResult" class="result"></div>
+  </div>
+
+  <div class="card">
+    <h3>📌 今日の編集部からのひとこと</h3>
+    <div class="editor">
+      <div class="name">佐倉さん｜新人担当</div>
+      <p id="editorMessage">「完成させよう」としなくて大丈夫。今日はひとつ、面白い選択肢を見つけてみましょう。</p>
+    </div>
+  </div>
+
+  <div class="section-title">CREATIVE TIPS</div>
+
+  <div class="tip">
+    <strong>描写は「説明」より一歩先へ</strong>
+    「悲しかった」と書く代わりに、その人が何をしたのかを考えてみよう。
+  </div>
+
+  <div class="tip" style="margin-top:9px">
+    <strong>「だから？」を一回だけ</strong>
+    出来事を書いたら、「だから主人公はどうする？」と一度だけ掘る。
+  </div>
+
+  <div class="tip" style="margin-top:9px">
+    <strong>主人公には「欲しいもの」を</strong>
+    大事件じゃなくてもOK。会いたい、隠したい、帰りたい、認められたい。
+  </div>
+
+  <div class="card" style="margin-top:15px">
+    <h3>📅 今月の練習</h3>
+    <div id="homeCalendar"></div>
+    <p class="small" id="streakText"></p>
+  </div>
+
+</section>
+
+
+<!-- PRACTICE -->
+<section id="practice" class="screen">
+
+  <div class="hero">
+    <span class="label">STORY TRAINING</span>
+    <h2>ストーリー練習</h2>
+    <p>ひとつずつ、物語を組み立てる筋肉を鍛えよう。</p>
+  </div>
+
+  <div class="card">
+    <h3>① 3行プロット</h3>
+    <p class="small">「主人公 → 出来事 → 選択」の3行だけ。</p>
+
+    <div class="field">
+      <label>1行目｜主人公は？</label>
+      <textarea id="plot1" placeholder="例：人に頼るのが苦手な編集者"></textarea>
+    </div>
+
+    <div class="field">
+      <label>2行目｜何が起きる？</label>
+      <textarea id="plot2" placeholder="例：昔別れた恋人から原稿が届く"></textarea>
+    </div>
+
+    <div class="field">
+      <label>3行目｜主人公は何を選ぶ？</label>
+      <textarea id="plot3" placeholder="例：原稿を返さず、自分で続きを書く"></textarea>
+    </div>
+
+    <button class="bigbtn" onclick="savePractice('3行プロット')">保存する ＋10pt</button>
+  </div>
+
+
+  <div class="card">
+    <h3>② オチを10個</h3>
+    <p class="small">「これはないな」も含めて、とにかく10個。</p>
+
+    <div id="endingInputs"></div>
+
+    <button class="bigbtn light" onclick="saveEndings()">10個まとめて保存 ＋10pt</button>
+  </div>
+
+
+  <div class="card">
+    <h3>③ 主人公に「次は何を選ばせる？」</h3>
+
+    <div class="field">
+      <label>主人公</label>
+      <input id="heroName" placeholder="例：秘密を抱えた会社員">
+    </div>
+
+    <div class="field">
+      <label>今の状況</label>
+      <textarea id="heroSituation" placeholder="例：親友から突然、結婚すると告げられた"></textarea>
+    </div>
+
+    <div class="field">
+      <label>選択肢A</label>
+      <input id="choiceA" placeholder="例：祝福する">
+    </div>
+
+    <div class="field">
+      <label>選択肢B</label>
+      <input id="choiceB" placeholder="例：秘密を打ち明ける">
+    </div>
+
+    <div class="field">
+      <label>主人公が選ぶのは？</label>
+      <select id="heroChoice">
+        <option value="">選択してください</option>
+        <option>A</option>
+        <option>B</option>
+        <option>どちらも選ばない</option>
+        <option>第三の選択をする</option>
+      </select>
+    </div>
+
+    <button class="bigbtn" onclick="saveChoice()">選択を保存 ＋10pt</button>
+  </div>
+
+
+  <div class="card">
+    <h3>🎭 課題パック</h3>
+    <p class="small">気分に合わせてテーマを選ぼう。</p>
+
+    <div class="grid" style="margin-top:12px">
+      <button class="choice pack" data-pack="恋愛・人間ドラマ">💗<br>恋愛・人間ドラマ</button>
+      <button class="choice pack" data-pack="ファンタジー">✨<br>ファンタジー</button>
+      <button class="choice pack" data-pack="どんでん返し">🌀<br>どんでん返し</button>
+      <button class="choice pack" data-pack="書き方トレーニング">✍️<br>書き方トレーニング</button>
+    </div>
+
+    <div id="packTask" class="result"></div>
+  </div>
+
+</section>
+
+
+<!-- ONE LINE -->
+<section id="oneline" class="screen">
+
+  <div class="hero">
+    <span class="label">ONE-LINE / 60 MINUTES</span>
+    <h2>もっと練習する</h2>
+    <p>方向性は決めない。モチーフだけ渡します。</p>
+  </div>
+
+  <div class="card">
+    <h3>🎰 今日のモチーフ</h3>
+    <div class="motif" id="motif">？</div>
+    <button class="bigbtn light" onclick="newMotif()">別のモチーフにする</button>
+  </div>
+
+  <div class="card">
+    <h3>⏱️ ワンライ 60分</h3>
+    <div class="timer" id="timer">60:00</div>
+
+    <div class="grid">
+      <button class="bigbtn" onclick="startTimer()">スタート</button>
+      <button class="bigbtn secondary" onclick="resetTimer()">リセット</button>
+    </div>
+
+    <div class="field">
+      <label>タイトル</label>
+      <input id="oneTitle" placeholder="書き終わってから決めてもOK">
+    </div>
+
+    <div class="field">
+      <label>本文メモ / 下書き</label>
+      <textarea id="oneText" style="min-height:300px" placeholder="モチーフから自由に書いてみよう。"></textarea>
+    </div>
+
+    <button class="bigbtn green" onclick="saveOneLine()">作品を保存 ＋20pt</button>
+  </div>
+
+</section>
+
+
+<!-- TITLES -->
+<section id="titles" class="screen">
+
+  <div class="hero">
+    <span class="label">TITLE TRAINING</span>
+    <h2>タイトル10個</h2>
+    <p>「これが一番いい」を探す前に、まず10個出す。</p>
+  </div>
+
+  <div class="card">
+    <h3>📝 今日の作品</h3>
+    <div class="field">
+      <label>作品の内容を一言で</label>
+      <textarea id="titleTheme" placeholder="例：雨の日に昔の恋人と再会する話"></textarea>
+    </div>
+
+    <div id="titleInputs"></div>
+
+    <button class="bigbtn" onclick="saveTitles()">10個保存 ＋10pt</button>
+  </div>
+
+  <div class="card">
+    <h3>💡 タイトルの小技</h3>
+    <div class="tip">
+      <strong>① 作中の印象的な言葉</strong>
+      セリフや小道具から拾う。
+    </div>
+    <div class="tip" style="margin-top:9px">
+      <strong>② 「○○の○○」型</strong>
+      シンプルだけど強い。抽象語＋具体物も使いやすい。
+    </div>
+    <div class="tip" style="margin-top:9px">
+      <strong>③ 本文に出てこない言葉</strong>
+      テーマや余韻だけをタイトルにする方法も。
+    </div>
+  </div>
+
+</section>
+
+
+<!-- STOCK -->
+<section id="stock" class="screen">
+
+  <div class="hero">
+    <span class="label">MY MVP COLLECTION</span>
+    <h2>⭐ MVPストック</h2>
+    <p>「これは使える！」と思ったアイデアを残しておこう。</p>
+  </div>
+
+  <div id="stockList"></div>
+
+  <div class="card">
+    <h3>💾 データについて</h3>
+    <p class="small">
+      練習内容は、このブラウザの保存領域に記録されます。
+      GitHubには作品本文を送信しません。
+    </p>
+    <button class="bigbtn light" onclick="clearData()">保存データをすべて消去</button>
+  </div>
+
+</section>
+
+<footer>
+  創作編集部 ✦ 今日もひとつ、物語を前へ。
+</footer>
+
+</main>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+/* =========================
+   DATA
+========================= */
+
+const tasks = {
+  "恋愛・人間ドラマ":[
+    "「好き」と言えない二人が、最後に一度だけ本音を言う場面を考える。",
+    "主人公が、好きな人のためについた小さな嘘を考える。",
+    "別れた二人が、偶然同じ傘を使うことになった。何が起きる？",
+    "主人公が「会いたくない」と思っている相手に会わなければならない理由を考える。",
+    "相手の何気ない一言で、主人公の価値観が少しだけ変わる場面を考える。"
+  ],
+  "ファンタジー":[
+    "魔法が一度だけ使えるなら、主人公は何に使う？",
+    "勇者ではなく、勇者を待つ側の人物を主人公にする。",
+    "魔法の代償が「大切な思い出」だったら？",
+    "怪物が実は主人公を守っていたと分かる出来事を考える。",
+    "誰も使わなくなった魔法道具を、主人公が拾う。そこから何が起きる？"
+  ],
+  "どんでん返し":[
+    "主人公が探していた犯人は、実は主人公自身だった。",
+    "最初から読者に見えていたものの意味が最後に反転する話を考える。",
+    "善人だと思っていた人物がした『正しいこと』の裏側を考える。",
+    "主人公が守ろうとしていた人物の正体を変えてみる。",
+    "最後の一文で、冒頭の一文の意味が変わる話を考える。"
+  ],
+  "書き方トレーニング":[
+    "「悲しい」を使わずに、悲しい人物を描写する。",
+    "会話だけで二人の関係性が分かる場面を書く。",
+    "五感を3つ使って、朝の駅を描写する。",
+    "説明を一切使わず、主人公が嘘をついていると伝える。",
+    "『いつ・どこで・何をしているか』を意識して100字を書く。"
+  ]
+};
+
+const motifs=[
+  "煙草","朝日","濡れた靴","古い鍵","青い傘",
+  "空になった花瓶","知らない香水","終電","蝉の声",
+  "片方だけのイヤリング","冷めたコーヒー","消えた電球",
+  "知らない名前のメモ","赤いマフラー","壊れた時計",
+  "誰かの忘れ物","雨上がりの道路","空席","古い写真",
+  "鳴らない電話"
+];
+
+const editorMessages=[
+  "「完成させよう」としなくて大丈夫。今日はひとつ、面白い選択肢を見つけてみましょう。",
+  "主人公が迷ったら、作者なら選ばないほうを選ばせてみるのも手です。",
+  "出来事を一つ増やすより、「その出来事で何を選ぶ？」を考えてみましょう。",
+  "ありきたりなアイデアは、二つ目の理由を足すと急に表情が変わります。",
+  "今日は上手さより数。10個出して、1個だけ拾えれば十分です。",
+  "登場人物に秘密をひとつ持たせると、会話に奥行きが出ます。",
+  "困ったら「この人が一番されたくないこと」を考えてみてください。",
+  "最初のアイデアが普通でも大丈夫。『でも実は？』を一回だけ足してみましょう。"
+];
+
+const state={
+  points:Number(localStorage.getItem("creativePoints")||0),
+  done:JSON.parse(localStorage.getItem("creativeDone")||"{}"),
+  stock:JSON.parse(localStorage.getItem("creativeStock")||"[]"),
+  timer:null,
+  seconds:3600,
+  motif:""
+};
+
+/* =========================
+   INIT
+========================= */
+
+document.addEventListener("DOMContentLoaded",()=>{
+  updatePoints();
+  createEndingInputs();
+  createTitleInputs();
+  renderCalendar("homeCalendar");
+  renderStock();
+  setEditorMessage();
+  newMotif();
+
+  document.querySelectorAll(".navbtn").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      showScreen(btn.dataset.screen);
+    });
+  });
+
+  document.querySelectorAll(".time-choice").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      document.querySelectorAll(".time-choice").forEach(x=>x.classList.remove("selected"));
+      btn.classList.add("selected");
+    });
+  });
+
+  document.querySelectorAll(".pack").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      document.querySelectorAll(".pack").forEach(x=>x.classList.remove("selected"));
+      btn.classList.add("selected");
+      showPack(btn.dataset.pack);
+    });
+  });
+});
+
+/* =========================
+   NAVIGATION
+========================= */
+
+function showScreen(id){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+
+  document.querySelectorAll(".navbtn").forEach(b=>{
+    b.classList.toggle("active",b.dataset.screen===id);
+  });
+
+  window.scrollTo({top:0,behavior:"smooth"});
+
+  if(id==="stock") renderStock();
+  if(id==="home") renderCalendar("homeCalendar");
+}
+
+/* =========================
+   POINTS
+========================= */
+
+function addPoints(n){
+  state.points+=n;
+  localStorage.setItem("creativePoints",state.points);
+  updatePoints();
+}
+
+function updatePoints(){
+  document.getElementById("points").textContent=state.points;
+}
+
+function toast(msg){
+  const t=document.getElementById("toast");
+  t.textContent=msg;
+  t.classList.add("show");
+  clearTimeout(window.toastTimer);
+  window.toastTimer=setTimeout(()=>t.classList.remove("show"),1800);
+}
+
+function todayKey(){
+  const d=new Date();
+  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+}
+
+function markDone(type){
+  state.done[todayKey()]=true;
+  localStorage.setItem("creativeDone",JSON.stringify(state.done));
+  renderCalendar("homeCalendar");
+  toast(type+"を記録しました ✦");
+}
+
+/* =========================
+   HOME
+========================= */
+
+function setEditorMessage(){
+  const msg=editorMessages[Math.floor(Math.random()*editorMessages.length)];
+  document.getElementById("editorMessage").textContent="「"+msg+"」";
+}
+
+function gacha(){
+  const packs=Object.keys(tasks);
+  const pack=packs[Math.floor(Math.random()*packs.length)];
+  const list=tasks[pack];
+  const task=list[Math.floor(Math.random()*list.length)];
+
+  const result=document.getElementById("gachaResult");
+  result.innerHTML=
+    '<span class="badge pink">'+pack+'</span>'+
+    '<div class="task">'+task+'</div>'+
+    '<div class="task-sub">編集部からの今日のお題です。正解はありません。</div>';
+
+  result.classList.add("show");
+  addPoints(1);
+}
+
+function renderCalendar(id){
+  const el=document.getElementById(id);
+  if(!el)return;
+
+  const now=new Date();
+  const year=now.getFullYear();
+  const month=now.getMonth();
+  const first=new Date(year,month,1);
+  const last=new Date(year,month+1,0);
+
+  let html='<div class="small" style="margin-bottom:8px">'+
+    year+"年"+(month+1)+"月"+'</div>';
+
+  html+='<div class="calendar">';
+
+  const labels=["日","月","火","水","木","金","土"];
+  labels.forEach(x=>{
+    html+='<div style="text-align:center;font-size:9px;color:#aaa">'+x+'</div>';
+  });
+
+  for(let i=0;i<first.getDay();i++){
+    html+='<div></div>';
+  }
+
+  for(let d=1;d<=last.getDate();d++){
+    const key=year+"-"+String(month+1).padStart(2,"0")+"-"+String(d).padStart(2,"0");
+    let cls="day";
+    if(state.done[key])cls+=" done";
+    if(d===now.getDate())cls+=" today";
+    html+='<div class="'+cls+'">'+d+'</div>';
+  }
+
+  html+='</div>';
+  el.innerHTML=html;
+
+  const doneCount=Object.keys(state.done).filter(k=>k.startsWith(year+"-"+String(month+1).padStart(2,"0"))).length;
+  const streak=document.getElementById("streakText");
+  if(streak)streak.textContent="今月 "+doneCount+"日 練習しています ✦";
+}
+
+/* =========================
+   PRACTICE
+========================= */
+
+function createEndingInputs(){
+  const el=document.getElementById("endingInputs");
+  let html="";
+  for(let i=1;i<=10;i++){
+    html+=`
+      <div class="ten-row">
+        <div class="ten-no">${i}</div>
+        <input id="ending${i}" placeholder="オチ ${i}">
+      </div>`;
+  }
+  el.innerHTML=html;
+}
+
+function createTitleInputs(){
+  const el=document.getElementById("titleInputs");
+  let html="";
+  for(let i=1;i<=10;i++){
+    html+=`
+      <div class="ten-row">
+        <div class="ten-no">${i}</div>
+        <input id="title${i}" placeholder="タイトル ${i}">
+        <button class="mvp" id="mvp${i}" onclick="toggleMVP(${i})">☆</button>
+      </div>`;
+  }
+  el.innerHTML=html;
+}
+
+function savePractice(type){
+  const p1=document.getElementById("plot1").value.trim();
+  const p2=document.getElementById("plot2").value.trim();
+  const p3=document.getElementById("plot3").value.trim();
+
+  if(!p1&&!p2&&!p3){
+    toast("まず1行だけでも書いてみよう ✍️");
+    return;
+  }
+
+  state.stock.push({
+    type:type,
+    date:todayKey(),
+    text:[p1,p2,p3].filter(Boolean).join("\n")
+  });
+
+  localStorage.setItem("creativeStock",JSON.stringify(state.stock));
+  addPoints(10);
+  markDone(type);
+  toast("保存しました！ +10pt");
+}
+
+function saveEndings(){
+  const arr=[];
+  for(let i=1;i<=10;i++){
+    const v=document.getElementById("ending"+i).value.trim();
+    if(v)arr.push(v);
+  }
+
+  if(!arr.length){
+    toast("まず1個、思いついたオチを書こう ✍️");
+    return;
+  }
+
+  state.stock.push({
+    type:"オチ10個",
+    date:todayKey(),
+    text:arr.join("\n")
+  });
+
+  localStorage.setItem("creativeStock",JSON.stringify(state.stock));
+  addPoints(10);
+  markDone("オチ10個");
+  toast(arr.length+"個保存しました！ +10pt");
+}
+
+function saveChoice(){
+  const hero=document.getElementById("heroName").value.trim();
+  const situation=document.getElementById("heroSituation").value.trim();
+  const a=document.getElementById("choiceA").value.trim();
+  const b=document.getElementById("choiceB").value.trim();
+  const c=document.getElementById("heroChoice").value;
+
+  if(!hero&&!situation){
+    toast("主人公か状況を書いてみよう ✍️");
+    return;
+  }
+
+  const text=
+    "主人公："+hero+
+    "\n状況："+situation+
+    "\nA："+a+
+    "\nB："+b+
+    "\n選択："+c;
+
+  state.stock.push({
+    type:"主人公の選択",
+    date:todayKey(),
+    text:text
+  });
+
+  localStorage.setItem("creativeStock",JSON.stringify(state.stock));
+  addPoints(10);
+  markDone("主人公の選択");
+  toast("選択を保存しました！ +10pt");
+}
+
+function showPack(pack){
+  const list=tasks[pack]||[];
+  const task=list[Math.floor(Math.random()*list.length)];
+  const el=document.getElementById("packTask");
+
+  el.innerHTML=
+    '<span class="badge pink">'+pack+'</span>'+
+    '<div class="task">'+task+'</div>'+
+    '<div class="task-sub">「書けそう！」と思ったら、そのまま練習へ。</div>';
+
+  el.classList.add("show");
+}
+
+/* =========================
+   ONE LINE
+========================= */
+
+function newMotif(){
+  let m;
+  do{
+    m=motifs[Math.floor(Math.random()*motifs.length)];
+  }while(m===state.motif && motifs.length>1);
+
+  state.motif=m;
+  document.getElementById("motif").textContent=m;
+}
+
+function updateTimer(){
+  const min=Math.floor(state.seconds/60);
+  const sec=state.seconds%60;
+  document.getElementById("timer").textContent=
+    String(min).padStart(2,"0")+":"+String(sec).padStart(2,"0");
+}
+
+function startTimer(){
+  if(state.timer){
+    clearInterval(state.timer);
+    state.timer=null;
+    document.getElementById("timer").classList.remove("running");
+    toast("タイマーを一時停止しました");
+    return;
+  }
+
+  document.getElementById("timer").classList.add("running");
+  toast("60分スタート！ ✍️");
+
+  state.timer=setInterval(()=>{
+    state.seconds--;
+
+    if(state.seconds<=0){
+      state.seconds=0;
+      clearInterval(state.timer);
+      state.timer=null;
+      document.getElementById("timer").classList.remove("running");
+      toast("60分終了！おつかれさま 🎉");
+      addPoints(5);
+    }
+
+    updateTimer();
+  },1000);
+}
+
+function resetTimer(){
+  clearInterval(state.timer);
+  state.timer=null;
+  state.seconds=3600;
+  document.getElementById("timer").classList.remove("running");
+  updateTimer();
+}
+
+function saveOneLine(){
+  const title=document.getElementById("oneTitle").value.trim();
+  const text=document.getElementById("oneText").value.trim();
+
+  if(!text){
+    toast("まず少しだけ書いてみよう ✍️");
+    return;
+  }
+
+  state.stock.push({
+    type:"ワンライ",
+    date:todayKey(),
+    text:(title?"【"+title+"】\n":"")+"モチーフ："+state.motif+"\n\n"+text
+  });
+
+  localStorage.setItem("creativeStock",JSON.stringify(state.stock));
+  addPoints(20);
+  markDone("ワンライ");
+  toast("ワンライを保存しました！ +20pt");
+}
+
+/* =========================
+   TITLES
+========================= */
+
+let mvpSet=new Set();
+
+function toggleMVP(i){
+  const btn=document.getElementById("mvp"+i);
+
+  if(mvpSet.has(i)){
+    mvpSet.delete(i);
+    btn.classList.remove("on");
+    btn.textContent="☆";
+  }else{
+    mvpSet.add(i);
+    btn.classList.add("on");
+    btn.textContent="★";
+  }
+}
+
+function saveTitles(){
+  const theme=document.getElementById("titleTheme").value.trim();
+  const titles=[];
+
+  for(let i=1;i<=10;i++){
+    const v=document.getElementById("title"+i).value.trim();
+    if(v)titles.push({
+      title:v,
+      mvp:mvpSet.has(i)
+    });
+  }
+
+  if(!titles.length){
+    toast("タイトルを1個だけでも書いてみよう ✍️");
+    return;
+  }
+
+  titles.forEach(item=>{
+    if(item.mvp){
+      state.stock.push({
+        type:"⭐ MVPタイトル",
+        date:todayKey(),
+        text:(theme?"作品："+theme+"\n":"")+item.title
+      });
+    }
+  });
+
+  localStorage.setItem("creativeStock",JSON.stringify(state.stock));
+  addPoints(10);
+  markDone("タイトル10個");
+  toast(titles.length+"個保存！ MVPはストックしました ⭐");
+}
+
+/* =========================
+   STOCK
+========================= */
+
+function renderStock(){
+  const el=document.getElementById("stockList");
+
+  if(!state.stock.length){
+    el.innerHTML=
+      '<div class="card"><div class="empty">まだストックはありません。<br>「これ使える！」と思ったものを残してみよう ⭐</div></div>';
+    return;
+  }
+
+  const arr=[...state.stock].reverse();
+
+  let html="";
+  arr.forEach((item,index)=>{
+    html+=`
+      <div class="mypost">
+        <div>
+          <span class="badge pink">${escapeHTML(item.type)}</span>
+          <span class="date">${escapeHTML(item.date)}</span>
+        </div>
+        <p style="white-space:pre-wrap;margin:8px 0 0">${escapeHTML(item.text)}</p>
+        <button class="bigbtn light" onclick="deleteStock(${state.stock.length-1-index})">削除</button>
+      </div>`;
+  });
+
+  el.innerHTML=html;
+}
+
+function deleteStock(index){
+  if(!confirm("このストックを削除しますか？"))return;
+  state.stock.splice(index,1);
+  localStorage.setItem("creativeStock",JSON.stringify(state.stock));
+  renderStock();
+  toast("削除しました");
+}
+
+function clearData(){
+  if(!confirm("保存した練習データをすべて削除しますか？"))return;
+
+  localStorage.removeItem("creativeStock");
+  localStorage.removeItem("creativeDone");
+  localStorage.removeItem("creativePoints");
+
+  state.points=0;
+  state.stock=[];
+  state.done={};
+
+  updatePoints();
+  renderStock();
+  renderCalendar("homeCalendar");
+  toast("保存データを削除しました");
+}
+
+function escapeHTML(str){
+  return String(str)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+</script>
+
+</body>
+</html>
