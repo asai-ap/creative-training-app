@@ -480,49 +480,272 @@ footer{
 }
 
 /* =========================
-   DARK MODE：タイトル・お題ボックス
+   DARK MODE
 ========================= */
 
-/* 各ページ上部のタイトルエリア */
+/* ページ全体 */
+body.dark-mode {
+  background:#17171c !important;
+  color:#f4f4f6 !important;
+}
+
+/* ヘッダー */
+body.dark-mode header {
+  background:#222229 !important;
+  border-bottom:1px solid #383840 !important;
+}
+
+body.dark-mode .brand h1 {
+  color:#ffffff !important;
+}
+
+body.dark-mode .brand p {
+  color:#bfc0c8 !important;
+}
+
+/* ポイント */
+body.dark-mode .points {
+  background:#432530 !important;
+  color:#ff9bb4 !important;
+}
+
+/* ナビ */
+body.dark-mode .navbtn {
+  background:#303038 !important;
+  color:#d0d0d7 !important;
+}
+
+body.dark-mode .navbtn.active {
+  background:#ff4f7b !important;
+  color:#ffffff !important;
+}
+
+/* ヒーロー */
 body.dark-mode .hero {
-  background: #292930 !important;
-  border-color: #41414a !important;
-  color: #f5f5f7 !important;
+  background:#292930 !important;
+  border-color:#41414a !important;
+  color:#f5f5f7 !important;
 }
 
 body.dark-mode .hero h2 {
-  color: #ffffff !important;
+  color:#ffffff !important;
 }
 
 body.dark-mode .hero p {
-  color: #d0d0d8 !important;
+  color:#d0d0d8 !important;
 }
 
 body.dark-mode .hero .label {
-  color: #ff91ae !important;
+  color:#ff91ae !important;
 }
 
-/* 課題ガチャ・課題パックのお題ボックス */
+/* カード */
+body.dark-mode .card {
+  background:#24242b !important;
+  border-color:#383840 !important;
+  color:#f4f4f6 !important;
+}
+
+body.dark-mode .card h3 {
+  color:#f4f4f6 !important;
+}
+
+body.dark-mode .card p {
+  color:#d0d0d8 !important;
+}
+
+/* セクションタイトル */
+body.dark-mode .section-title {
+  color:#d5d5dc !important;
+}
+
+/* 小さい説明文 */
+body.dark-mode .small {
+  color:#bfc0c8 !important;
+}
+
+/* 選択ボタン */
+body.dark-mode .choice {
+  background:#2b2b33 !important;
+  border-color:#484851 !important;
+  color:#ddddE4 !important;
+}
+
+body.dark-mode .choice.selected {
+  background:#432530 !important;
+  border-color:#ff4f7b !important;
+  color:#ff9bb4 !important;
+}
+
+/* 入力欄 */
+body.dark-mode textarea,
+body.dark-mode input,
+body.dark-mode select {
+  background:#2b2b33 !important;
+  color:#ffffff !important;
+  border-color:#484851 !important;
+}
+
+body.dark-mode textarea::placeholder,
+body.dark-mode input::placeholder {
+  color:#858590 !important;
+}
+
+body.dark-mode .field label {
+  color:#d0d0d8 !important;
+}
+
+/* バッジ */
+body.dark-mode .badge {
+  background:#303038 !important;
+  color:#c8c8d0 !important;
+}
+
+body.dark-mode .badge.pink {
+  background:#432530 !important;
+  color:#ff9bb4 !important;
+}
+
+/* 編集部コメント */
+body.dark-mode .editor {
+  background:#303038 !important;
+  color:#f4f4f6 !important;
+}
+
+body.dark-mode .editor .name {
+  color:#ff91ae !important;
+}
+
+/* お題結果ボックス */
 body.dark-mode .result {
-  background: #292930 !important;
-  border-color: #41414a !important;
-  color: #f5f5f7 !important;
+  background:#292930 !important;
+  border-color:#41414a !important;
+  color:#f5f5f7 !important;
 }
 
-/* お題本文 */
 body.dark-mode .result .task {
-  color: #ffffff !important;
+  color:#ffffff !important;
 }
 
-/* お題の補足 */
 body.dark-mode .result .task-sub {
-  color: #c8c8d0 !important;
+  color:#c8c8d0 !important;
 }
 
-/* ボックス内のカテゴリー表示 */
 body.dark-mode .result .badge {
-  background: #432530 !important;
-  color: #ff9bb4 !important;
+  background:#432530 !important;
+  color:#ff9bb4 !important;
+}
+
+/* TIPS */
+body.dark-mode .tip {
+  background:#2a2a31 !important;
+  color:#eeeeF2 !important;
+  border-left-color:#ff4f7b !important;
+}
+
+body.dark-mode .tip strong {
+  color:#ff91ae !important;
+}
+
+/* タイマー */
+body.dark-mode .timer {
+  color:#ffffff !important;
+}
+
+body.dark-mode .timer.running {
+  color:#ff7196 !important;
+}
+
+/* モチーフ */
+body.dark-mode .motif {
+  background:#432530 !important;
+  color:#ff9bb4 !important;
+}
+
+/* 10個入力の番号 */
+body.dark-mode .ten-no {
+  background:#303038 !important;
+  color:#d0d0d8 !important;
+}
+
+/* MVPボタン */
+body.dark-mode .mvp {
+  background:#2b2b33 !important;
+  border-color:#484851 !important;
+  color:#ddddE4 !important;
+}
+
+body.dark-mode .mvp.on {
+  background:#554d25 !important;
+  border-color:#cdb33c !important;
+}
+
+/* カレンダー */
+body.dark-mode .day {
+  background:#303038 !important;
+  color:#9999a5 !important;
+}
+
+body.dark-mode .day.done {
+  background:#ff4f7b !important;
+  color:#ffffff !important;
+}
+
+body.dark-mode .day.today {
+  outline-color:#ff4f7b !important;
+}
+
+/* MVPストック */
+body.dark-mode .mypost {
+  background:#24242b !important;
+  border-color:#383840 !important;
+  color:#f4f4f6 !important;
+}
+
+body.dark-mode .mypost .date {
+  color:#9999a5 !important;
+}
+
+/* 空のストック */
+body.dark-mode .empty {
+  color:#a0a0aa !important;
+}
+
+/* フッター */
+body.dark-mode .app-footer {
+  color:#92929d !important;
+}
+
+/* テーマボタン */
+body.dark-mode .theme-toggle {
+  color:#ffffff !important;
+}
+
+/* 名前設定モーダル */
+body.dark-mode .modal-card {
+  background:#24242b !important;
+  color:#f4f4f6 !important;
+}
+
+body.dark-mode .modal-card p {
+  color:#c8c8d0 !important;
+}
+
+body.dark-mode .modal-card input {
+  background:#2b2b33 !important;
+  color:#ffffff !important;
+  border-color:#484851 !important;
+}
+
+/* 保存ボタンなど */
+body.dark-mode .bigbtn.secondary {
+  background:#45454e !important;
+}
+
+/* トースト */
+body.dark-mode .toast {
+  background:#f4f4f6 !important;
+  color:#292936 !important;
 }
 
 
