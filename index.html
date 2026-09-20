@@ -479,255 +479,53 @@ footer{
   font-size: 12px;
 }
 
-  /* =========================
-   DARK MODE
-========================= */
-
-body.dark-mode {
-  background: #17171c;
-  color: #f4f4f6;
-}
-
-body.dark-mode .card,
-body.dark-mode .panel,
-body.dark-mode .task-card {
-  background: #24242b;
-  color: #f4f4f6;
-}
-
-body.dark-mode input,
-body.dark-mode textarea,
-body.dark-mode select {
-  background: #2b2b33;
-  color: #ffffff;
-  border-color: #44444d;
-}
-
-body.dark-mode .muted,
-body.dark-mode .sub,
-body.dark-mode small {
-  color: #b5b5bf;
-}
-
-body.dark-mode .app-footer {
-  color: #888894;
-}
-
-.theme-toggle {
-  border: none;
-  background: transparent;
-  font-size: 22px;
-  cursor: pointer;
-  padding: 6px;
-}
-
 /* =========================
-   DARK MODE 視認性調整
+   DARK MODE：タイトル・お題ボックス
 ========================= */
 
-/* ヘッダー */
-body.dark-mode header {
-  background: #222229;
-  border-bottom-color: #383840;
+/* 各ページ上部のタイトルエリア */
+body.dark-mode .hero {
+  background: #292930 !important;
+  border-color: #41414a !important;
+  color: #f5f5f7 !important;
 }
 
-body.dark-mode .brand h1 {
-  color: #f5f5f7;
-}
-
-body.dark-mode .brand p {
-  color: #b9b9c2;
-}
-
-/* ポイント表示 */
-body.dark-mode .points {
-  background: #3a2029;
-  color: #ff8eaa;
-}
-
-/* ナビゲーション */
-body.dark-mode .navbtn {
-  background: #303038;
-  color: #c7c7cf;
-}
-
-body.dark-mode .navbtn.active {
-  background: #ff4f7b;
-  color: #fff;
-}
-
-/* 「TIPS」「タイトル小技」などの見出し */
-body.dark-mode .section-title {
-  color: #c7c7cf;
-}
-
-/* TIPS */
-body.dark-mode .tip {
-  background: #24242b;
-  color: #eeeeF2;
-  border-left-color: #ff4f7b;
-}
-
-body.dark-mode .tip strong {
-  color: #ff91ae;
-}
-
-/* ワンライのタイマー */
-body.dark-mode .timer {
-  color: #f5f5f7;
-}
-
-body.dark-mode .timer.running {
-  color: #ff6f94;
-}
-
-/* 小さい補足文字 */
-body.dark-mode .small {
-  color: #b5b5bf;
-}
-
-/* =========================
-   DARK MODE 完全上書き
-========================= */
-
-body.dark-mode {
-  background: #17171c !important;
-  color: #f4f4f6 !important;
-}
-
-/* ヘッダー */
-body.dark-mode header {
-  background: #222229 !important;
-  border-bottom: 1px solid #383840 !important;
-}
-
-body.dark-mode .brand h1 {
+body.dark-mode .hero h2 {
   color: #ffffff !important;
 }
 
-body.dark-mode .brand p {
-  color: #bfc0c8 !important;
+body.dark-mode .hero p {
+  color: #d0d0d8 !important;
 }
 
-/* ポイント */
-body.dark-mode .points {
+body.dark-mode .hero .label {
+  color: #ff91ae !important;
+}
+
+/* 課題ガチャ・課題パックのお題ボックス */
+body.dark-mode .result {
+  background: #292930 !important;
+  border-color: #41414a !important;
+  color: #f5f5f7 !important;
+}
+
+/* お題本文 */
+body.dark-mode .result .task {
+  color: #ffffff !important;
+}
+
+/* お題の補足 */
+body.dark-mode .result .task-sub {
+  color: #c8c8d0 !important;
+}
+
+/* ボックス内のカテゴリー表示 */
+body.dark-mode .result .badge {
   background: #432530 !important;
   color: #ff9bb4 !important;
 }
 
-/* ナビ */
-body.dark-mode .navbtn {
-  background: #303038 !important;
-  color: #d0d0d7 !important;
-}
 
-body.dark-mode .navbtn.active {
-  background: #ff4f7b !important;
-  color: #ffffff !important;
-}
-
-/* カード */
-body.dark-mode .card,
-body.dark-mode .panel,
-body.dark-mode .task-card {
-  background: #24242b !important;
-  color: #f4f4f6 !important;
-}
-
-/* 「CREATIVE TIPS」など */
-body.dark-mode .section-title {
-  color: #d5d5dc !important;
-}
-
-/* カード内の見出し */
-body.dark-mode .card h3,
-body.dark-mode .panel h3,
-body.dark-mode .task-card h3 {
-  color: #f4f4f6 !important;
-}
-
-/* TIPS */
-body.dark-mode .tip {
-  background: #2a2a31 !important;
-  color: #eeeeF2 !important;
-  border-left-color: #ff4f7b !important;
-}
-
-body.dark-mode .tip strong {
-  color: #ff91ae !important;
-}
-
-/* ワンライのタイマー */
-body.dark-mode .timer {
-  color: #ffffff !important;
-}
-
-body.dark-mode .timer.running {
-  color: #ff7196 !important;
-}
-
-/* 補足文字 */
-body.dark-mode .muted,
-body.dark-mode .sub,
-body.dark-mode small,
-body.dark-mode .small {
-  color: #bfc0c8 !important;
-}
-
-/* 入力欄 */
-body.dark-mode input,
-body.dark-mode textarea,
-body.dark-mode select {
-  background: #2b2b33 !important;
-  color: #ffffff !important;
-  border-color: #484851 !important;
-}
-
-/* テーマ切替ボタン */
-body.dark-mode .theme-toggle {
-  color: #ffffff !important;
-}
-
-/* フッター */
-body.dark-mode .app-footer {
-  color: #92929d !important;
-}
-
-/* =========================
-   DARK MODE：タイトルボックス
-========================= */
-
-/* 各ページ上部のタイトルボックス */
-body.dark-mode .hero {
-  background: #292930 !important;
-  color: #f5f5f7 !important;
-}
-
-/* タイトル */
-body.dark-mode .hero h2 {
-  color: #f5f5f7 !important;
-}
-
-/* タイトル下の説明文 */
-body.dark-mode .hero p {
-  color: #c9c9d1 !important;
-}
-
-/* 課題ガチャの結果ボックス */
-body.dark-mode #gachaResult {
-  background: #292930 !important;
-  color: #f5f5f7 !important;
-}
-
-/* ガチャのお題本文 */
-body.dark-mode #gachaResult .task {
-  color: #ffffff !important;
-}
-
-/* ガチャの補足 */
-body.dark-mode #gachaResult .task-sub {
-  color: #c5c5ce !important;
-}
 </style>
 
 </head>
