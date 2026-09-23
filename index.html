@@ -777,7 +777,7 @@ body.dark-mode footer {
 </head>
 
 <body>
-  <div id="nameModal" class="modal-overlay">
+  <div id="nameModal" class="modal-overlay hidden">
   <div class="modal-card">
     <h2>✍️ 創作編集部へようこそ！</h2>
     <p>編集部で呼ばれる名前を教えてください。</p>
@@ -1299,9 +1299,10 @@ function gacha(){
     '<div class="task">'+task+'</div>'+
     '<div class="task-sub">編集部からの今日のお題です。正解はありません。</div>';
 
-  result.classList.add("show");
-    document.getElementById("todayTask").value=task;
-　  document.getElementById("endingIntro").value=task;
+    result.classList.add("show");
+  document.getElementById("todayTask").value = task;
+  document.getElementById("endingIntro").value = task;
+}
 }
   
 
