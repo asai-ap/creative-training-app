@@ -876,7 +876,10 @@ body.dark-mode footer {
   <div class="card">
     <h3>① 3行プロット</h3>
     <p class="small">「主人公 → 出来事 → 選択」の3行だけ。</p>
-
+　<div class="field">
+  <label>今日のお題</label>
+  <input id="todayTask" placeholder="例：少女が森に入った">
+</div>
     <div class="field">
       <label>1行目｜主人公は？</label>
       <textarea id="plot1" placeholder="例：人に頼るのが苦手な編集者"></textarea>
@@ -899,6 +902,11 @@ body.dark-mode footer {
   <div class="card">
     <h3>② オチを10個</h3>
     <p class="small">「これはないな」も含めて、とにかく10個。</p>
+   
+  <div class="field">
+  <label>導入</label>
+  <input id="endingIntro" placeholder="例：少女が森に入った">
+　</div>
 
     <div id="endingInputs"></div>
 
@@ -1285,7 +1293,10 @@ function gacha(){
     '<div class="task-sub">編集部からの今日のお題です。正解はありません。</div>';
 
   result.classList.add("show");
+    document.getElementById("todayTask").value=task;
+　  document.getElementById("endingIntro").value=task;
 }
+  
 
 function renderCalendar(id){
   const el=document.getElementById(id);
@@ -1333,14 +1344,30 @@ function renderCalendar(id){
 
 function createEndingInputs(){
   const el=document.getElementById("endingInputs");
+
+  const examples=[
+    "例：森の奥で、少女は昔の自分に出会った",
+    "例：少女が森に入ったのは、母を探すためだった",
+    "例：森そのものが少女を待っていた",
+    "例：少女は何も見つけず、そのまま帰った",
+    "例：森で出会った老人が、少女の名前を知っていた",
+    "例：少女が探していたものは、最初から手の中にあった",
+    "例：少女は森を出る代わりに、森に残ることを選んだ",
+    "例：森に入ったことで、少女の秘密が知られてしまった",
+    "例：少女が森に入った翌日、町から人が消えた",
+    "例：最後まで少女は、森に入った理由を思い出せなかった"
+  ];
+
   let html="";
+
   for(let i=1;i<=10;i++){
     html+=`
       <div class="ten-row">
         <div class="ten-no">${i}</div>
-        <input id="ending${i}" placeholder="オチ ${i}">
+        <input id="ending${i}" placeholder="${examples[i-1]}">
       </div>`;
   }
+
   el.innerHTML=html;
 }
 
@@ -1381,21 +1408,27 @@ function savePractice(type){
 }
 
 function saveEndings(){
+  const intro=document.getElementById("endingIntro").value.trim();
   const arr=[];
+
   for(let i=1;i<=10;i++){
     const v=document.getElementById("ending"+i).value.trim();
     if(v)arr.push(v);
   }
 
-  if(!arr.length){
-    toast("まず1個、思いついたオチを書こう ✍️");
+  if(!intro && !arr.length){
+    toast("導入かオチを1個だけでも書いてみよう ✍️");
     return;
   }
+
+  const text=
+    (intro ? "【導入】\n"+intro+"\n\n" : "")+
+    arr.map((v,i)=>(i+1)+"："+v).join("\n");
 
   state.stock.push({
     type:"オチ10個",
     date:todayKey(),
-    text:arr.join("\n")
+    text:text
   });
 
   localStorage.setItem("creativeStock",JSON.stringify(state.stock));
