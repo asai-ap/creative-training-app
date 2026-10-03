@@ -1082,6 +1082,18 @@ body.dark-mode footer {
 </div>
 
 <div id="toast" class="toast"></div>
+  <script>
+window.addEventListener("error", function(e) {
+  document.body.insertAdjacentHTML(
+    "afterbegin",
+    '<div style="position:fixed;top:0;left:0;right:0;z-index:99999;background:#fff0f0;color:#b00020;padding:16px;font-size:14px;">エラー：' +
+    e.message +
+    '</div>'
+  );
+});
+</script>
+
+<script>
 
 <script>
 
