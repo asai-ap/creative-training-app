@@ -1781,6 +1781,138 @@ function loadTheme() {
   loadTheme();
 
   
+const EMO_HISTORY_KEY = "storyAppEmoHistoryV1";
+
+// 保存済みの練習記録を読み込む
+function getEmoHistory() {
+  try {
+    const saved = localStorage.getItem(EMO_HISTORY_KEY);
+    return saved ? JSON.parse(saved) : [];
+  } catch (error) {
+    return [];
+  }
+}
+
+// 練習記録を保存する
+function saveEmoPractice() {
+  const answers = [
+    document.getElementById("emoAnswer1").value.trim(),
+    document.getElementById("emoAnswer2").value.trim(),
+    document.getElementById("emoAnswer3").value.trim(),
+    document.getElementById("emoAnswer4").value.trim()
+  ];
+
+  if (answers.every(answer => answer === "")) {
+    alert("まずは文章を書いてみよう！ ひとことだけでも大丈夫。");
+    return;
+  }
+
+  const history = getEmoHistory();
+
+  history.unshift({
+    id: Date.now(),
+    date: new Date().toLocaleString("ja-JP"),
+    answers: answers
+  });
+
+  try {
+    localStorage.setItem(
+      EMO_HISTORY_KEY,
+      JSON.stringify(history)
+    );
+  } catch (error) {
+    alert("保存できなかったよ。端末の空き容量などを確認してね。");
+    return;
+  }
+
+  renderEmoHistory();
+
+  document.getElementById("emoSaved").textContent =
+    "保存できたよ！ 今日の一歩を記録しました ✨";
+
+  if (typeof toast === "function") {
+    toast("エモさ練習を保存しました！");
+  }
+}
+
+// 保存済みの記録を画面に表示する
+function renderEmoHistory() {
+  const container = document.getElementById("emoHistory");
+  if (!container) return;
+
+  const history = getEmoHistory();
+
+  if (history.length === 0) {
+    container.innerHTML = "<p>まだ記録はありません。最初の一歩を書いてみよう！</p>";
+    return;
+  }
+
+  const lessonTitles = [
+    "感情を動作にする",
+    "五感で記憶を呼び起こす",
+    "言葉と本音のずれ",
+    "ふたりだけの意味を作る"
+  ];
+
+  container.innerHTML = history.map(record => {
+    const answers = Array.isArray(record.answers)
+      ? record.answers
+      : [];
+
+    const answerHTML = lessonTitles.map((title, index) => {
+      const answer = answers[index] || "";
+
+      if (!answer) return "";
+
+      return `
+        <div class="emo-history-answer">
+          <strong>${escapeHTML(title)}</strong>
+          <p>${escapeHTML(answer).replace(/\n/g, "<br>")}</p>
+        </div>
+      `;
+    }).join("");
+
+    return `
+      <div class="emo-history-record">
+        <p><strong>${escapeHTML(record.date || "日付不明")}</strong></p>
+        ${answerHTML}
+        <button type="button"
+          onclick="deleteEmoRecord(${Number(record.id)})">
+          この記録を削除
+        </button>
+      </div>
+    `;
+  }).join("");
+}
+
+// 指定した記録を削除する
+function deleteEmoRecord(id) {
+  if (!confirm("この練習記録を削除する？")) return;
+
+  const history = getEmoHistory().filter(
+    record => Number(record.id) !== Number(id)
+  );
+
+  try {
+    localStorage.setItem(
+      EMO_HISTORY_KEY,
+      JSON.stringify(history)
+    );
+  } catch (error) {
+    alert("削除内容を保存できなかったよ。");
+    return;
+  }
+
+  renderEmoHistory();
+
+  if (typeof toast === "function") {
+    toast("記録を削除しました");
+  }
+}
+
+// アプリ起動時に履歴を表示する
+renderEmoHistory();
+
 
 </script>
 
