@@ -808,6 +808,8 @@ body.dark-mode footer {
   <nav>
     <button class="navbtn active" data-screen="home">ホーム</button>
     <button class="navbtn" data-screen="practice">練習</button>
+    ```html
+<button class="navbtn" data-screen="emo">エモさ練習</button>
     <button class="navbtn" data-screen="oneline">ワンライ</button>
     <button class="navbtn" data-screen="titles">タイトル10個</button>
     <button class="navbtn" data-screen="stock">MVPストック</button>
@@ -975,6 +977,53 @@ body.dark-mode footer {
 
 </section>
 
+  <section id="emo" class="screen">
+  <div class="card">
+    <h2>💗 エモさ練習</h2>
+    <p>説明するより、感じさせる。心に残る一文を育てよう。</p>
+  </div>
+  <div class="card">
+    <h3>LESSON 01｜感情を動作にする</h3>
+    <p><strong>技法：</strong>「悲しかった」と書く代わりに、悲しさが表れる動作や反応を書く。</p>
+    <p><strong>例：</strong></p>
+    <p>説明：彼女は悲しかった。</p>
+    <p>描写：彼女は笑ってうなずき、帰り際にだけ、彼のマグカップをそっと棚の奥へしまった。</p>
+    <p>悲しみを直接説明せず、行動から読者に想像してもらう練習だよ。</p>
+    <label for="emoAnswer1">実践課題：寂しさを、感情の名前を使わずに描写してみよう。</label>
+    <textarea id="emoAnswer1" rows="4" placeholder="例：帰ってきた部屋で、彼女は……"></textarea>
+  </div>
+  <div class="card">
+    <h3>LESSON 02｜五感で記憶を呼び起こす</h3>
+    <p><strong>技法：</strong>音、匂い、温度、手触りなどを使い、場面に実感を与える。</p>
+    <p><strong>例：</strong>冷めた紅茶から、彼が帰ってこなかった夜を思い出す。</p>
+    <label for="emoAnswer2">実践課題：懐かしさを感じる場面を、五感を使って描写しよう。</label>
+    <textarea id="emoAnswer2" rows="4" placeholder="音や匂い、温度から書いてみよう"></textarea>
+  </div>
+  <div class="card">
+    <h3>LESSON 03｜言葉と本音のずれ</h3>
+    <p><strong>技法：</strong>口にした言葉と、仕草や行動に表れる本音をずらす。</p>
+    <p><strong>例：</strong>「別に待ってない」と言いながら、彼女は玄関の灯りを消さなかった。</p>
+    <label for="emoAnswer3">実践課題：「会いたかった」と言わせずに、会いたかった気持ちを伝えよう。</label>
+    <textarea id="emoAnswer3" rows="4" placeholder="台詞でも、動作でもOK"></textarea>
+  </div>
+  <div class="card">
+    <h3>LESSON 04｜ふたりだけの意味を作る</h3>
+    <p><strong>技法：</strong>何気ない物や言葉に、ふたりの過去や関係性を重ねる。</p>
+    <p><strong>例：</strong>いつも半分こしていたお菓子を、今日は相手の分まで食べずに残しておく。</p>
+    <label for="emoAnswer4">実践課題：何気ない小物をひとつ選び、ふたりの関係が伝わる描写を書こう。</label>
+    <textarea id="emoAnswer4" rows="4" placeholder="小物を、ふたりだけの思い出につなげよう"></textarea>
+  </div>
+  <div class="card">
+    <h3>📝 今日の練習を保存</h3>
+    <p>書けたところだけでも大丈夫。途中の文章も記録に残せるよ。</p>
+    <button class="primary" onclick="saveEmoPractice()">練習を保存する</button>
+    <p id="emoSaved" aria-live="polite"></p>
+  </div>
+  <div class="card">
+    <h3>📚 練習の記録</h3>
+    <div id="emoHistory"></div>
+  </div>
+</section>
 
 <!-- ONE LINE -->
 <section id="oneline" class="screen">
