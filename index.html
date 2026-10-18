@@ -809,6 +809,7 @@ body.dark-mode footer {
     <button class="navbtn active" data-screen="home">ホーム</button>
     <button class="navbtn" data-screen="practice">練習</button>
     <button class="navbtn" data-screen="emo">エモさ練習</button>
+    <button class="navbtn" data-screen="alchemy">エモさの錬金術</button>
     <button class="navbtn" data-screen="oneline">ワンライ</button>
     <button class="navbtn" data-screen="titles">タイトル10個</button>
     <button class="navbtn" data-screen="stock">MVPストック</button>
@@ -1023,6 +1024,99 @@ body.dark-mode footer {
     <div id="emoHistory"></div>
   </div>
 </section>
+
+  <!-- エモ錬金 -->
+<section id="alchemy" class="screen">
+  <div class="card">
+    <h2>⚗️ エモさの錬金術</h2>
+    <p>何気ない描写を、胸に残る物語へ。</p>
+    <p>お題を作り、書いて、振り返る。自分だけの表現を錬成しよう。</p>
+  </div>
+
+  <div class="card">
+    <h3>① 今回の課題を設定</h3>
+
+    <label for="alchemyEmotion">描きたい感情</label>
+    <select id="alchemyEmotion">
+      <option value="胸が締めつけられる">胸が締めつけられる</option>
+      <option value="切なさ">切なさ</option>
+      <option value="幸福">幸福</option>
+      <option value="焦燥">焦燥</option>
+      <option value="懐かしさ">懐かしさ</option>
+      <option value="安堵">安堵</option>
+      <option value="言葉にできない愛しさ">言葉にできない愛しさ</option>
+    </select>
+
+    <label for="alchemyRelation">人物の関係</label>
+    <select id="alchemyRelation">
+      <option value="恋人同士">恋人同士</option>
+      <option value="片想い">片想い</option>
+      <option value="元恋人同士">元恋人同士</option>
+      <option value="夫婦">夫婦</option>
+      <option value="相棒">相棒</option>
+      <option value="長年の友人">長年の友人</option>
+    </select>
+
+    <label for="alchemyMotif">モチーフ</label>
+    <select id="alchemyMotif">
+      <option value="傘">傘</option>
+      <option value="鍵">鍵</option>
+      <option value="指輪">指輪</option>
+      <option value="手紙">手紙</option>
+      <option value="飲み物">飲み物</option>
+      <option value="写真">写真</option>
+      <option value="手袋">手袋</option>
+      <option value="窓">窓</option>
+      <option value="自由入力">自由入力</option>
+    </select>
+
+    <div id="alchemyCustomMotifWrap" hidden>
+      <label for="alchemyCustomMotif">好きなモチーフ</label>
+      <input id="alchemyCustomMotif" type="text" placeholder="例：古い腕時計">
+    </div>
+
+    <label for="alchemyLength">目標文字数</label>
+    <select id="alchemyLength">
+      <option value="300">300字</option>
+      <option value="500" selected>500字</option>
+      <option value="800">800字</option>
+      <option value="1000">1,000字</option>
+    </select>
+
+    <button class="primary" type="button" onclick="generateAlchemyTask()">
+      ✨ お題を錬成する
+    </button>
+  </div>
+
+  <div id="alchemyTaskArea" hidden>
+    <div class="card">
+      <h3>② 今回のお題</h3>
+      <div id="alchemyTask"></div>
+    </div>
+
+    <div class="card">
+      <h3>③ 物語の設計</h3>
+      <p>書き始める前に、モチーフの意味の変化を考えよう。</p>
+
+      <label for="alchemyStart">冒頭でのモチーフの意味</label>
+      <textarea id="alchemyStart" rows="2" placeholder="最初、このモチーフは何を表している？"></textarea>
+
+      <label for="alchemyShift">意味が揺らぐきっかけ</label>
+      <textarea id="alchemyShift" rows="2" placeholder="どんな出来事や仕草で意味が変わる？"></textarea>
+
+      <label for="alchemyEnd">終盤でのモチーフの意味</label>
+      <textarea id="alchemyEnd" rows="2" placeholder="最後には何を表すようになる？"></textarea>
+    </div>
+
+    <div class="card">
+      <h3>④ 本文を書く</h3>
+      <label for="alchemyDraft">作品本文</label>
+      <textarea id="alchemyDraft" rows="14" placeholder="自分の言葉で書いてみよう。模範解答はまだ見なくて大丈夫。"></textarea>
+      <p>文字数：<strong id="alchemyCharCount">0</strong>字</p>
+    </div>
+  </div>
+</section>
+
 
 <!-- ONE LINE -->
 <section id="oneline" class="screen">
