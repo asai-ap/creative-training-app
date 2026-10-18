@@ -1919,6 +1919,112 @@ function saveEmoPractice() {
   }
 
   renderEmoHistory();
+  
+function initAlchemy() {
+  const motifSelect = document.getElementById("alchemyMotif");
+  const customWrap = document.getElementById("alchemyCustomMotifWrap");
+  const draft = document.getElementById("alchemyDraft");
+  const count = document.getElementById("alchemyCharCount");
+
+  if (!motifSelect || !customWrap || !draft || !count) return;
+
+  motifSelect.addEventListener("change", function () {
+    customWrap.hidden = this.value !== "自由入力";
+  });
+
+  draft.addEventListener("input", function () {
+    count.textContent = this.value.length;
+  });
+}
+
+function generateAlchemyTask() {
+  const emotion = document.getElementById("alchemyEmotion").value;
+  const relation = document.getElementById("alchemyRelation").value;
+  const motifSelect = document.getElementById("alchemyMotif").value;
+  const length = Number(document.getElementById("alchemyLength").value);
+
+  let motif = motifSelect;
+
+  if (motifSelect === "自由入力") {
+    motif = document.getElementById("alchemyCustomMotif").value.trim();
+
+    if (!motif) {
+      alert("モチーフを入力してね！");
+      return;
+    }
+  }
+
+  const situations = [
+    "ふたりの間に、小さなすれ違いが起こる。互いに相手を気にかけているのに、素直な言葉が出てこない。",
+    "いつもなら何でもない習慣が、今日は少しだけ違って感じられる。理由を言葉にできないまま、ふたりは時間を過ごす。",
+    "片方が何気なくした行動に、もう片方が小さく傷つく。大きな喧嘩にはならないが、ふたりの間に沈黙が生まれる。",
+    "ふたりは同じものを見ているのに、受け取り方が少し違っている。その違いが、何気ない仕草に表れる。",
+    "何かを言いかけて、結局言わずに終わる。その代わりに、ふたりのどちらかが小さな行動を選ぶ。"
+  ];
+
+  const constraints = [
+    "モチーフを物語の冒頭・中盤・終盤の最低3回登場させる。",
+    "冒頭と終盤では、同じモチーフが異なる意味を持つようにする。",
+    "「" + emotion + "」という感情を直接説明する言葉に頼らず、行動・視線・台詞・身体感覚で表現する。",
+    "大きな事件や劇的な告白に頼らず、日常の小さな変化を中心に描く。",
+    "モチーフを単なる背景にせず、ふたりの関係の変化に結びつける。"
+  ];
+
+  const criteria = [
+    "冒頭で、モチーフがふたりにとって持つ意味が伝わる。",
+    "中盤で、出来事や仕草によってモチーフの意味が揺らぐ。",
+    "終盤で、モチーフの意味が冒頭から変化している。",
+    "感情を直接説明せず、描写から読者が気持ちを想像できる。",
+    "ふたりの関係性が、台詞や行動に表れている。",
+    "モチーフがあるからこそ生まれる余韻がある。"
+  ];
+
+  const situation = situations[
+    Math.floor(Math.random() * situations.length)
+  ];
+
+  const shuffledConstraints = constraints
+    .map(value => ({ value, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(item => item.value);
+
+  const task = `
+    <p><strong>今回のテーマ：</strong>${escapeHTML(emotion)}</p>
+    <p><strong>人物の関係：</strong>${escapeHTML(relation)}</p>
+    <p><strong>モチーフ：</strong>${escapeHTML(motif)}</p>
+    <p><strong>目標文字数：</strong>${length}字</p>
+
+    <h4>具体的なお題</h4>
+    <p>${escapeHTML(relation)}のふたりが、${escapeHTML(motif)}にまつわる何気ない時間を過ごす。</p>
+    <p>${escapeHTML(situation)}</p>
+    <p>この出来事を通して「${escapeHTML(emotion)}」を描き、物語の終わりには、${escapeHTML(motif)}が冒頭とは違う意味を持つように書いてみよう。</p>
+
+    <h4>制約</h4>
+    <ol>${shuffledConstraints.map(item => `<li>${escapeHTML(item)}</li>`).join("")}</ol>
+
+    <h4>達成基準</h4>
+    <ul>${criteria.map(item => `<li>${escapeHTML(item)}</li>`).join("")}</ul>
+
+    <p><strong>書き方のヒント：</strong>最初から感動的な文章を狙わなくて大丈夫。まずは、ふたりが何をして、何を言わなかったのかを書いてみよう。</p>
+  `;
+
+  document.getElementById("alchemyTask").innerHTML = task;
+  document.getElementById("alchemyTaskArea").hidden = false;
+
+  // 新しい課題を生成したら、設計欄と本文欄を空にする
+  ["alchemyStart", "alchemyShift", "alchemyEnd", "alchemyDraft"].forEach(id => {
+    document.getElementById(id).value = "";
+  });
+
+  document.getElementById("alchemyCharCount").textContent = "0";
+  document.getElementById("alchemyTaskArea").scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}
+
+initAlchemy();
+
 
   document.getElementById("emoSaved").textContent =
     "保存できたよ！ 今日の一歩を記録しました ✨";
